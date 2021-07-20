@@ -16,7 +16,7 @@ export const EntryList = () => {
 
   useEffect(() => {
     setEntries(entries);
-  }, [entries]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [entries]);
 
   useEffect(() => {
     if (searchedTerm !== "") {

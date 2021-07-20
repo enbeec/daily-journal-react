@@ -8,7 +8,7 @@ export const DailyJournal = () => {
   return (
     <div className="DailyJournal">
       <EntryProvider>
-        <MoodProvider >
+        <MoodProvider>
           <EntryForm />
           <EntryList />
         </MoodProvider>
