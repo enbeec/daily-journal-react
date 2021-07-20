@@ -11,58 +11,66 @@ export const EntryList = () => {
   const [moodSelected, setMoodSelected] = useState("");
 
   useEffect(() => {
-    getEntries()
-      .then(getMoods)
-  }, []);
+    getEntries().then(getMoods);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setEntries(entries)
-  }, [entries])
+    setEntries(entries);
+  }, [entries]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (searchedTerm !== "") {
-        searchEntries(searchedTerm)
+      searchEntries(searchedTerm);
     }
-  }, [searchedTerm])
-
+  }, [searchedTerm]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filterAllEntries = (event) => {
-    const filteredEntriesByMood = entries.filter(entry => entry.moodId === parseInt(event.target.value))
-    setEntries(filteredEntriesByMood)
-    setMoodSelected(parseInt(event.target.value))
-  }
-
+    const filteredEntriesByMood = entries.filter(
+      (entry) => entry.moodId === parseInt(event.target.value)
+    );
+    setEntries(filteredEntriesByMood);
+    setMoodSelected(parseInt(event.target.value));
+  };
 
   return (
     <>
       <h1>Filter Entries</h1>
 
-      {
-        moods.map(mood => {
-          return <>
-            <input type="radio" value={mood.id} name="moodId" checked={moodSelected === mood.id}
+      {moods.map((mood) => {
+        return (
+          <>
+            <input
+              type="radio"
+              value={mood.id}
+              name="moodId"
+              checked={moodSelected === mood.id}
               onClick={filterAllEntries}
-            /> {mood.label}
+            />{" "}
+            {mood.label}
           </>
-        })
-      }
+        );
+      })}
 
-      <div >
-        <button onClick={() => {
-          setEntries(entries)
-          setMoodSelected("")
-        }}>Clear Filter</button>
+      <div>
+        <button
+          onClick={() => {
+            setEntries(entries);
+            setMoodSelected("");
+          }}
+        >
+          Clear Filter
+        </button>
       </div>
 
       <div>
-
-        <input type="text" placeholder="Search" onKeyUp={
-          (event) => {
-            const searchTerm = event.target.value
-            setTerm(searchTerm)
-          }
-        } />
-
+        <input
+          type="text"
+          placeholder="Search"
+          onKeyUp={(event) => {
+            const searchTerm = event.target.value;
+            setTerm(searchTerm);
+          }}
+        />
       </div>
 
       <h1>Entries</h1>
@@ -73,11 +81,10 @@ export const EntryList = () => {
         */}
 
       <div className="entries">
-        {filteredEntries.map(entry => {
+        {filteredEntries.map((entry) => {
           return <Entry key={entry.id} entry={entry} moods={moods} />;
         })}
       </div>
-
     </>
   );
 };
